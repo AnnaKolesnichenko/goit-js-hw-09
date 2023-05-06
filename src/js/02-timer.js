@@ -27,17 +27,17 @@ function startTimer() {
     const now = new Date().getTime();
     const difference = selectedDate.getTime() - now;
 
-    if(difference <= 0) {
-        clearInterval(timerId);   
-    } 
+   
     
     if(difference <= 0) {
         Notiflix.Notify.failure("Please choose a date in the future");
         startBtn.disabled = true;
+        clearInterval(timerId);
     } 
         startBtn.disabled = false;
 
-    convertMs(difference);   
+    convertMs(difference);
+   
 }
 
 function addLeadingZero(val) {
@@ -62,13 +62,14 @@ function convertMs(ms) {
         let days, hours, minutes, seconds;
 
         if(difference > 0) {
-            const days = addLeadingZero(Math.floor(difference / day));
-            const hours = addLeadingZero(Math.floor((difference % day) / hour));
-            const minutes = addLeadingZero(Math.floor(((difference % day) % hour) / minute));
-            const seconds = addLeadingZero(Math.floor((((difference % day) % hour) % minute) / second));
+            days = addLeadingZero(Math.floor(difference / day));
+            hours = addLeadingZero(Math.floor((difference % day) / hour));
+            minutes = addLeadingZero(Math.floor(((difference % day) % hour) / minute));
+            seconds = addLeadingZero(Math.floor((((difference % day) % hour) % minute) / second));
         } else {
             days = hours = minutes = seconds = '00';
-        }    
+        }
+    
         
         daysCount.textContent = days;
         hoursCount.textContent = hours;
