@@ -22,23 +22,26 @@ const createPromise = (position, delay) => {
   return promise;  
 }
 
-
 function promiseCreated(e) {
   e.preventDefault();
 
-  let setDelay = Number(firstDelay.value);
+  const setDelay = Number(firstDelay.value);
   const step = Number(delayStep.value);
   const amount = Number(amountAttempt.value);
 
   for(let i = 1; i <= amount; i ++) {
       createPromise(i, setDelay + (i - 1) * step)
-      .then((result) => {
-        Notiflix.Notify.success(`Promise ${result.position} fulfilled with delay ${result.delay}`)
-      })
-      .catch((error) => {
-        Notiflix.Notify.failure(`Promise ${error.position} rejectes with delay ${error.delay}`);
-      });
+      .then(onSuccess)
+      .catch(onFailure);
   }
+}
+
+function onSuccess({position, delay}) {
+  Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+}
+
+function onFailure({position, delay}) {
+  Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
 }
   
 form.addEventListener('submit', promiseCreated);
