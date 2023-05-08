@@ -25,9 +25,7 @@ const countDown = flatpickr(timePicker, {
 
 function startTimer() {
     const now = new Date().getTime();
-    const difference = selectedDate.getTime() - now;
-
-   
+    const difference = selectedDate.getTime() - now;   
     
     if(difference <= 0) {
         Notiflix.Notify.failure("Please choose a date in the future");

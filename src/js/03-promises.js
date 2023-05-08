@@ -22,6 +22,7 @@ const createPromise = (position, delay) => {
   return promise;  
 }
 
+
 function promiseCreated(e) {
   e.preventDefault();
 
@@ -29,8 +30,8 @@ function promiseCreated(e) {
   const step = Number(delayStep.value);
   const amount = Number(amountAttempt.value);
 
-  for(let i = 0; i <= amount; i ++) {
-      createPromise(i, setDelay + i * step)
+  for(let i = 1; i <= amount; i ++) {
+      createPromise(i, setDelay + (i - 1) * step)
       .then((result) => {
         Notiflix.Notify.success(`Promise ${result.position} fulfilled with delay ${result.delay}`)
       })
