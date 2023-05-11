@@ -5,6 +5,7 @@ const firstDelay = document.querySelector('input[name="delay"]');
 const delayStep = document.querySelector('input[name="step"]');
 const amountAttempt = document.querySelector('input[name="amount"]');
 
+
 const createPromise = (position, delay) => {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -29,7 +30,14 @@ function promiseCreated(e) {
   const step = Number(delayStep.value);
   const amount = Number(amountAttempt.value);
 
+  if(setDelay < 0 || step < 0 || amount <= 0) {
+    Notiflix.Notify.info("Please enter valid numbers over Zero into the fields");
+    form.reset();
+    return;
+  }
+
   for(let i = 1; i <= amount; i ++) {
+
       createPromise(i, setDelay + (i - 1) * step)
       .then(onSuccess)
       .catch(onFailure);
@@ -45,6 +53,7 @@ function onFailure({position, delay}) {
 }
   
 form.addEventListener('submit', promiseCreated);
+
 
 //------------------
 
