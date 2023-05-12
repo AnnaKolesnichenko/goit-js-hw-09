@@ -32,6 +32,12 @@ function renderPromise(e) {
   //if above figures are < , amount <=0 so no promise is rendered but a Notif is shown that 
   //'all' data should be more than 0
 
+  if(setDelay < 0 || step < 0 || amount <= 0) {
+    form.reset();
+    Notiflix.Notify.warning('Please enter numbers amove zero');
+    return;
+  }
+
   for(let i = 1; i <= amount; i++) {
     //delay += step
       createPromise(i, setDelay + (i - 1) * step)
