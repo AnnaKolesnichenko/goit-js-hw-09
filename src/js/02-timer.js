@@ -3,6 +3,8 @@ import Notiflix from "notiflix";
 
 const timePicker = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
+const resetBtn = document.querySelector('[data-reset]');
+
 const daysCount = document.querySelector('[data-days]');
 const hoursCount = document.querySelector('[data-hours]');
 const minutesCount = document.querySelector('[data-minutes]');
@@ -37,7 +39,15 @@ function startTimer() {
         startBtn.disabled = false;
 
     convertMs(difference);
-   
+    timePicker.disabled = true;
+}
+
+function onResetTimer() {
+    clearInterval(timerId);
+    selectedDate = null;
+    //timePicker.value = new Date().toISOString();
+    daysCount.textContent = hoursCount.textContent = minutesCount.textContent = secondsCount.textContent = '00';
+    timePicker.disabled = false;
 }
 
 function addLeadingZero(val) {
@@ -87,6 +97,7 @@ function convertMs(ms) {
 }
 
 startBtn.addEventListener('click', startTimer);
+resetBtn.addEventListener('click', onResetTimer);
 
 
 
