@@ -12,6 +12,8 @@ const secondsCount = document.querySelector('[data-seconds]');
 let selectedDate = null;
 let timerId;
 
+//can disable input so no new date could be picked so no data could be added when date is chosen a few times
+//can make reset btn 
 const countDown = flatpickr(timePicker, {
     enableTime: true,
     time_24hr: true,
@@ -72,7 +74,7 @@ function convertMs(ms) {
         daysCount.textContent = days;
         hoursCount.textContent = hours;
         minutesCount.textContent = minutes;
-        secondsCount.innerHTML = seconds;
+        secondsCount.textContent = seconds;
 
         return { 
             difference,

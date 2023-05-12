@@ -22,14 +22,18 @@ const createPromise = (position, delay) => {
   return promise;  
 }
 
-function promiseCreated(e) {
+function renderPromise(e) {
   e.preventDefault();
 
   const setDelay = Number(firstDelay.value);
   const step = Number(delayStep.value);
   const amount = Number(amountAttempt.value);
 
-  for(let i = 1; i <= amount; i ++) {
+  //if above figures are < , amount <=0 so no promise is rendered but a Notif is shown that 
+  //'all' data should be more than 0
+
+  for(let i = 1; i <= amount; i++) {
+    //delay += step
       createPromise(i, setDelay + (i - 1) * step)
       .then(onSuccess)
       .catch(onFailure);
@@ -44,7 +48,7 @@ function onFailure({position, delay}) {
   Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
 }
   
-form.addEventListener('submit', promiseCreated);
+form.addEventListener('submit', renderPromise);
 
 //------------------
 
